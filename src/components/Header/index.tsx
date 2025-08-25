@@ -1,9 +1,9 @@
 import { List, MapPin } from 'phosphor-react';
-import { HeaderContainer, HeaderContent } from './styles';
+import { HeaderContent } from './styles';
 
 export function Header() {
   return (
-    <HeaderContainer>
+    <div>
       <HeaderContent>
         <div>
           <MapPin size={28} />
@@ -14,6 +14,6 @@ export function Header() {
 
         <List size={28} />
       </HeaderContent>
-    </HeaderContainer>
+    </div>
   );
 }
