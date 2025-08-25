@@ -1,5 +1,11 @@
+import { Main } from './pages/Main';
+import { GlobalStyle } from './styles/global';
+
 export function App() {
   return (
-    <h1>Previsão do tempo</h1>
-  )
+    <div>
+      <GlobalStyle />
+      <Main />
+    </div>
+  );
 }
