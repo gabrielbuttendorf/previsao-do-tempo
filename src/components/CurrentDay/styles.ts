@@ -20,9 +20,13 @@ export const CurrentWeather = styled.div`
     flex-direction: column;
     width: 100%;
   }
+
+  span {
+    font-size: 1.2rem;
+  }
 `;
 
 export const Temperature = styled.span`
-  font-size: 4rem;
+  font-size: 4rem !important;
   line-height: 1.2;
-`
+`;

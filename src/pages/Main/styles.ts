@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const MainContainer = styled.div`
   width: 100%;
-  background: #ccc;
+  height: 100vh;
+  background: linear-gradient(#e7e7e7ff, #dbdbdbff);
   padding: 1rem;
 `;
 
