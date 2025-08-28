@@ -16,7 +16,7 @@ export const CurrentWeather = styled.div`
 
   div {
     display: flex;
-    align-items: start;
+    align-items: start !important;
     flex-direction: column;
     width: 100%;
   }
@@ -24,6 +24,10 @@ export const CurrentWeather = styled.div`
   span {
     font-size: 1.2rem;
   }
+`;
+
+export const Title = styled.span`
+  font-size: 1rem !important;
 `;
 
 export const Temperature = styled.span`
