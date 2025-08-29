@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Sunny from '../../assets/sunny.svg';
 import {
   CurrentDayContainer,
   CurrentWeather,
@@ -7,6 +6,27 @@ import {
   Title,
 } from './styles';
 import { getCurrentWeather } from '../../services/weather';
+import { weatherIcons } from '../../utils/weatherIcons';
+
+type WeatherIconCode =
+  | '01d'
+  | '01n'
+  | '02d'
+  | '02n'
+  | '03d'
+  | '03n'
+  | '04d'
+  | '04n'
+  | '09d'
+  | '09n'
+  | '10d'
+  | '10n'
+  | '11d'
+  | '11n'
+  | '13d'
+  | '13n'
+  | '50d'
+  | '50n';
 
 interface WeatherData {
   main: {
@@ -18,7 +38,7 @@ interface WeatherData {
     id: number;
     main: string;
     description: string;
-    icon: string;
+    icon: WeatherIconCode;
   }[];
 }
 
@@ -44,9 +64,12 @@ export function CurrentDay() {
     return desc.charAt(0).toUpperCase() + desc.slice(1).toLowerCase();
   }
 
+  const weatherIconCode = currentWeather?.weather?.[0]?.icon;
+  const weatherIcon = weatherIcons[weatherIconCode as WeatherIconCode];
+
   return (
     <CurrentDayContainer>
-      <img src={Sunny} alt="" />
+      <img src={weatherIcon} alt="" />
 
       <CurrentWeather>
         <div>
