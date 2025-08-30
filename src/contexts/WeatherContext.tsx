@@ -18,7 +18,7 @@ export const WeatherContext = createContext<WeatherContextData>(
 );
 
 export function WeatherProvider({ children }: WeatherProviderProps) {
-  const [cityName, setCityName] = useState('Jaragua do Sul');
+  const [cityName, setCityName] = useState('jaragua do sul');
   const [currentWeather, setCurrentWeather] = useState<WeatherData | null>(
     null
   );

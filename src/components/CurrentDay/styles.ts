@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const CurrentDayContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background: linear-gradient(#fff 50%, #fab040c0);
+  /* background: linear-gradient(#fff 50%, #fab040c0); */
   padding: 1rem;
   border-radius: 8px;
 `;

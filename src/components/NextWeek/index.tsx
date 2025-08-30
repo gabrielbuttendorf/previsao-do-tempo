@@ -1,5 +1,5 @@
 import { NextWeekContainer, Temperature } from './styles';
-import Sunny from '../../assets/sunny.svg';
+import Sunny from '../../assets/icons/01d.svg';
 
 export function NextWeek() {
   return (
