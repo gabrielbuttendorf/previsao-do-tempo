@@ -1,12 +1,11 @@
-import { useEffect, useState } from 'react';
 import {
   CurrentDayContainer,
   CurrentWeather,
   Temperature,
   Title,
 } from './styles';
-import { getCurrentWeather } from '../../services/weather';
 import { weatherIcons } from '../../utils/weatherIcons';
+import { useWeather } from '../../contexts/WeatherContext';
 
 type WeatherIconCode =
   | '01d'
@@ -28,7 +27,7 @@ type WeatherIconCode =
   | '50d'
   | '50n';
 
-interface WeatherData {
+export interface WeatherData {
   main: {
     temp: number;
     humidity: number;
@@ -40,24 +39,11 @@ interface WeatherData {
     description: string;
     icon: WeatherIconCode;
   }[];
+  name: string;
 }
 
 export function CurrentDay() {
-  const [currentWeather, setCurrentWeather] = useState<WeatherData | null>(
-    null
-  );
-
-  const city = 'Jaragua do Sul';
-
-  useEffect(() => {
-    async function fetchWeather() {
-      const data = await getCurrentWeather(city);
-      setCurrentWeather(data);
-      console.log(data);
-    }
-
-    fetchWeather();
-  }, [city]);
+  const { currentWeather } = useWeather();
 
   function formatDescription(desc?: string) {
     if (!desc) return '';
