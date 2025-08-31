@@ -19,12 +19,12 @@ export function Header() {
             <Dialog.Trigger asChild>
               <button>
                 <MapPin size={28} />
+                <p>{currentWeather?.name}</p>
               </button>
             </Dialog.Trigger>
 
             <ChangeCityModal />
           </Dialog.Root>
-          <p>{currentWeather?.name}</p>
         </div>
 
         <span>{today}</span>

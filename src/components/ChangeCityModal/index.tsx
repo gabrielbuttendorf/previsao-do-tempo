@@ -1,7 +1,8 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import { Content, Overlay } from './styles';
+import { Close, Content, Overlay } from './styles';
 import { useWeather } from '../../contexts/WeatherContext';
 import { useState, type FormEvent } from 'react';
+import { X } from 'phosphor-react';
 
 export function ChangeCityModal() {
   const { setCityName } = useWeather();
@@ -19,7 +20,9 @@ export function ChangeCityModal() {
       <Overlay />
 
       <Content>
-        <Dialog.Close />
+        <Close>
+          <X size={24}/>
+        </Close>
         <Dialog.Title>Buscar localização</Dialog.Title>
 
         <form action="" onSubmit={handleCitySubmit}>

@@ -18,6 +18,18 @@ export const HeaderContent = styled.div`
   }
 
   button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
     line-height: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      transition: all 0.2s;
+      color: #7e7e7eff;
+    }
   }
 `;
