@@ -9,3 +9,12 @@ export async function getCurrentWeather(city: string) {
   const json = await response.json();
   return json;
 }
+
+export async function getWeatherForecast(city: string) {
+  const response = await fetch(
+    `${BASE_URL}forecast?q=${city}&appid=${API_KEY}&lang=pt_br&units=metric`
+  );
+
+  const json = await response.json();
+  return json;
+}

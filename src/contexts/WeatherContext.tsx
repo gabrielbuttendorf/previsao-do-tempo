@@ -28,7 +28,6 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
     async function fetchWeather() {
       const data = await getCurrentWeather(cityName);
       setCurrentWeather(data);
-      console.log(data);
     }
 
     fetchWeather();

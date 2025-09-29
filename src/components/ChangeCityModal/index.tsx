@@ -1,18 +1,22 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { Close, Content, Overlay } from './styles';
 import { useWeather } from '../../contexts/WeatherContext';
-import { useState, type FormEvent } from 'react';
+import { useRef, useState, type FormEvent } from 'react';
 import { X } from 'phosphor-react';
 
 export function ChangeCityModal() {
   const { setCityName } = useWeather();
   const [inputValue, setInputValue] = useState('');
 
+  const closeRef = useRef<HTMLButtonElement>(null);
+
   function handleCitySubmit(event: FormEvent) {
     event.preventDefault();
     if (!inputValue.trim()) return;
 
     setCityName(inputValue);
+    setInputValue('');
+    closeRef.current?.click();
   }
 
   return (
@@ -20,8 +24,10 @@ export function ChangeCityModal() {
       <Overlay />
 
       <Content>
-        <Close>
-          <X size={24}/>
+        <Close asChild>
+          <button ref={closeRef} type="button">
+            <X size={24} />
+          </button>
         </Close>
         <Dialog.Title>Buscar localização</Dialog.Title>
 
