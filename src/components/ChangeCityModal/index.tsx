@@ -3,21 +3,27 @@ import { Close, Content, Overlay } from './styles';
 import { useWeather } from '../../contexts/WeatherContext';
 import { useRef, useState, type FormEvent } from 'react';
 import { X } from 'phosphor-react';
+import { useForm } from 'react-hook-form';
 
 export function ChangeCityModal() {
+  const { register, handleSubmit, watch } = useForm();
+
   const { setCityName } = useWeather();
   const [inputValue, setInputValue] = useState('');
 
   const closeRef = useRef<HTMLButtonElement>(null);
 
-  function handleCitySubmit(event: FormEvent) {
-    event.preventDefault();
-    if (!inputValue.trim()) return;
+  function handleCitySubmit(data: any) {
+    // event.preventDefault();
+    // if (!inputValue.trim()) return;
 
-    setCityName(inputValue);
-    setInputValue('');
+    setCityName(data.city);
+    // setInputValue('');
     closeRef.current?.click();
   }
+
+  const cityValue = watch('city') || '';
+  const cityIsEmpty = cityValue.trim() === '';
 
   return (
     <Dialog.Portal>
@@ -31,15 +37,14 @@ export function ChangeCityModal() {
         </Close>
         <Dialog.Title>Buscar localização</Dialog.Title>
 
-        <form action="" onSubmit={handleCitySubmit}>
+        <form action="" onSubmit={handleSubmit(handleCitySubmit)}>
           <input
             type="text"
             placeholder="Digite o nome da cidade"
-            value={inputValue}
-            onChange={(event) => setInputValue(event.target.value)}
+            {...register('city')}
           />
 
-          <button type="submit">OK</button>
+          <button type="submit" disabled={cityIsEmpty}>OK</button>
         </form>
       </Content>
     </Dialog.Portal>

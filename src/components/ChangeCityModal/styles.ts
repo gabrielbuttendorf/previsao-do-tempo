@@ -40,9 +40,13 @@ export const Content = styled(Dialog.Content)`
     background: #b1b1b1ff;
     cursor: pointer;
 
-    &:hover {
+    &:hover:not(:disabled) {
       background: #a8a8a8ff;
       transition: background 0.1s;
+    }
+
+    &:disabled {
+      opacity: 0.6;
     }
   }
 `;
