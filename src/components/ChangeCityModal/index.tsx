@@ -1,25 +1,49 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { Close, Content, Overlay } from './styles';
 import { useWeather } from '../../contexts/WeatherContext';
-import { useRef, useState, type FormEvent } from 'react';
+import { useRef, useState } from 'react';
 import { X } from 'phosphor-react';
 import { useForm } from 'react-hook-form';
+import { getWeatherForecast } from '../../services/weather';
 
 export function ChangeCityModal() {
-  const { register, handleSubmit, watch } = useForm();
-
+  const { register, handleSubmit, watch, reset } = useForm();
   const { setCityName } = useWeather();
-  const [inputValue, setInputValue] = useState('');
+
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const closeRef = useRef<HTMLButtonElement>(null);
 
-  function handleCitySubmit(data: any) {
-    // event.preventDefault();
-    // if (!inputValue.trim()) return;
+  async function handleCitySubmit(data: any) {
+    const city = data.city.trim();
+    if (!city) return;
 
-    setCityName(data.city);
-    // setInputValue('');
-    closeRef.current?.click();
+    setErrorMessage('');
+    setIsLoading(true);
+
+    try {
+      const response = await getWeatherForecast(city);
+
+      if (Number(response.cod) === 404) {
+        setErrorMessage('Cidade não encontrada.');
+        setIsLoading(false);
+        return;
+      }
+
+      setCityName(city);
+      setIsLoading(false);
+      closeRef.current?.click();
+      reset();
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage('Erro. Tente novamente.');
+      }
+
+      setIsLoading(false);
+    }
   }
 
   const cityValue = watch('city') || '';
@@ -44,7 +68,11 @@ export function ChangeCityModal() {
             {...register('city')}
           />
 
-          <button type="submit" disabled={cityIsEmpty}>OK</button>
+          {errorMessage && <p>{errorMessage}</p>}
+
+          <button type="submit" disabled={cityIsEmpty}>
+            {isLoading ? 'Buscando...' : 'OK'}
+          </button>
         </form>
       </Content>
     </Dialog.Portal>

@@ -7,6 +7,7 @@ export async function getCurrentWeather(city: string) {
   );
 
   const json = await response.json();
+
   return json;
 }
 
@@ -16,5 +17,6 @@ export async function getWeatherForecast(city: string) {
   );
 
   const json = await response.json();
+
   return json;
 }
