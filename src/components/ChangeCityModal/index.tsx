@@ -11,7 +11,8 @@ type CityFormData = {
 };
 
 export function ChangeCityModal() {
-  const { register, handleSubmit, watch, reset } = useForm<CityFormData>();
+  const { register, handleSubmit, watch, reset, setFocus } =
+    useForm<CityFormData>();
   const { setCityName } = useWeather();
 
   const [errorMessage, setErrorMessage] = useState('');
@@ -32,6 +33,7 @@ export function ChangeCityModal() {
       if (Number(response.cod) === 404) {
         setErrorMessage('Cidade não encontrada.');
         setIsLoading(false);
+        setFocus('city');
         return;
       }
 
@@ -44,6 +46,7 @@ export function ChangeCityModal() {
         setErrorMessage(error.message);
       } else {
         setErrorMessage('Erro. Tente novamente.');
+        setFocus('city');
       }
 
       setIsLoading(false);
@@ -57,7 +60,12 @@ export function ChangeCityModal() {
     <Dialog.Portal>
       <Overlay />
 
-      <Content>
+      <Content
+        onOpenAutoFocus={(e) => {
+          e.preventDefault();
+          setFocus('city');
+        }}
+      >
         <Close asChild>
           <button ref={closeRef} type="button">
             <X size={24} />
