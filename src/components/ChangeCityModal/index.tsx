@@ -6,8 +6,12 @@ import { X } from 'phosphor-react';
 import { useForm } from 'react-hook-form';
 import { getWeatherForecast } from '../../services/weather';
 
+type CityFormData = {
+  city: string;
+};
+
 export function ChangeCityModal() {
-  const { register, handleSubmit, watch, reset } = useForm();
+  const { register, handleSubmit, watch, reset } = useForm<CityFormData>();
   const { setCityName } = useWeather();
 
   const [errorMessage, setErrorMessage] = useState('');
@@ -15,7 +19,7 @@ export function ChangeCityModal() {
 
   const closeRef = useRef<HTMLButtonElement>(null);
 
-  async function handleCitySubmit(data: any) {
+  async function handleCitySubmit(data: CityFormData) {
     const city = data.city.trim();
     if (!city) return;
 
