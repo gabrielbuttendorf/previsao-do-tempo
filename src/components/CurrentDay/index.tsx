@@ -7,7 +7,7 @@ import {
 import { weatherIcons } from '../../utils/weatherIcons';
 import { useWeather } from '../../contexts/WeatherContext';
 
-type WeatherIconCode =
+export type WeatherIconCode =
   | '01d'
   | '01n'
   | '02d'
